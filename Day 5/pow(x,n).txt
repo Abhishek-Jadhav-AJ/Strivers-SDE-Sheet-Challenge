@@ -1,0 +1,44 @@
+/*
+
+Example 1:
+
+Input: x = 2.00000, n = 10
+
+Output: 1024.00000
+
+Explanation: You need to calculate 2.00000 raised to 10 which gives ans 1024.00000
+
+Example 2:
+
+Input: x = 2.10000, n = 3
+
+Output: 9.26100
+
+Explanation: You need to calculate 2.10000 raised to 3 which gives ans 9.26100
+
+*/
+
+class Solution {
+public:
+    double myPow(double x, int n) {
+
+        double num = 1;
+        long long nn = n;
+        if(nn < 0) nn = -nn;
+        while(nn>0){
+            if(nn%2==1){
+                num = num * x;
+                nn--;
+            }
+            else{
+                x = x*x;
+                nn/=2;
+            }
+        }
+        if(n < 0){
+            num = 1.0/num;
+        }
+        return num;
+        
+    }
+};
