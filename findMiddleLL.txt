@@ -1,0 +1,71 @@
+
+//Naive Approach
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* middleNode(ListNode* head) {
+
+
+      ListNode* curr1 = head;
+      ListNode* curr2 = head;
+      ListNode* result = NULL;
+
+      int cnt1 = 0 ;
+      int cnt2 = 0;
+
+      while(curr1!=NULL){
+          cnt1+=1;
+          curr1 = curr1->next;
+      }
+
+      while(curr2!=NULL){
+          
+          if(cnt2 == (cnt1/2)){
+              result = curr2;
+              break;
+          }
+          cnt2+=1;
+          curr2 = curr2->next;
+      }
+        
+        return result ; 
+    }
+};
+
+//Better
+Tortise hare Approach
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* middleNode(ListNode* head) {
+
+        ListNode* slow = head;
+        ListNode* fast = head;
+
+        while(fast && fast->next){
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+
+        return slow ; 
+    }
+};
