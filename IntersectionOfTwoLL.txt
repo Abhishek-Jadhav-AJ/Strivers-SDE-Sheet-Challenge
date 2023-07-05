@@ -1,0 +1,71 @@
+
+
+//Brute Force 
+
+// 1 - here we will have two head
+// 2 - If we take head1 keep head1 and traverse using head2 
+// 3 - if both node are same then that will be the intersection node
+// 4 - if we didnt find then move the head2 and again travers the list using head1
+// 5 - finally if we didnt find the intersection return NULL
+
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *head1, ListNode *head2) {
+
+        while(head2 != NULL) {
+        ListNode* temp = head1;
+        while(temp != NULL) {
+            if(temp == head2) return head2;
+            temp = temp->next;
+        }
+        head2 = head2->next;
+    }
+    //intersection is not present between the lists return null
+    return NULL;
+        
+    }
+};
+
+
+// Hashing store the addresses of the nodes at hash map and then check for another LL if it found
+then that will be the intersection node
+
+O(n+m)
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *head1, ListNode *head2) {
+
+        unordered_set<ListNode*> st;
+
+        while(head1 != NULL){
+            st.insert(head1); // store all the addresses of the node in set
+            head1 = head1->next;
+        }
+
+        while(head2 != NULL){
+            if(st.find(head2) != st.end()) return head2;
+
+            head2 = head2->next;
+        }
+
+        return NULL;
+    }
+};
