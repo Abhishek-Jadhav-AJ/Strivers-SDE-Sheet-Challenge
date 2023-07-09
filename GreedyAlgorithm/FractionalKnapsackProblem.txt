@@ -1,0 +1,52 @@
+
+
+//Approach
+
+// Sort the given values and weights by calculating the value/weight
+// create comparator Function to do that
+// the traverse and if sum <= W then add it to ans 
+// if sum not less than W then calculate the remainning part that we can assign to it
+// return final ans 
+
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Item{
+    int value;
+    int weight;
+};
+bool comp(Item a , Item b){
+        double r1 = (double)a.value / (double)a.weight;
+        double r2 = (double)b.value / (double)b.weight;
+        
+        return r1 > r2;
+        
+}
+class Solution
+{
+    public:
+    double fractionalKnapsack(int W, Item arr[], int n)
+    {
+        sort(arr , arr+n , comp);
+        
+        int curr = 0 ; 
+        double ans = 0 ;
+        
+        for(int i = 0 ; i < n ; i++){
+            
+            if(curr + arr[i].weight <= W){
+                curr += arr[i].weight;
+                ans += arr[i].value;
+            }
+            else {
+                int remain = W - curr;
+                ans += (arr[i].value / (double)arr[i].weight) * (double)remain;
+                break;
+            }
+        }
+        
+        return ans ; 
+    }
+        
+};
+
