@@ -1,0 +1,40 @@
+
+
+class Solution {
+public:
+    void helper(int ind , int t , vector<int>& arr , vector<int>& ds , vector<vector<int>>& ans){
+
+        if(t == 0 ){
+            ans.push_back(ds);
+            return ;
+        }
+        if(ind == arr.size()){
+            return;
+        }
+        
+        if(arr[ind] <= t){
+            ds.push_back(arr[ind]);
+            helper(ind+1,t-arr[ind],arr,ds,ans);
+            ds.pop_back();
+        }
+
+        while(ind+1 < arr.size() && arr[ind] == arr[ind+1]){
+            ind++;
+        }
+
+        helper(ind+1 , t , arr , ds , ans );
+
+    }
+    vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
+        
+        sort(candidates.begin() , candidates.end());
+        
+        vector<vector<int>> ans;
+        
+        vector<int> ds;
+
+        helper(0 , target , candidates , ds , ans);
+
+        return ans;
+    }
+};
